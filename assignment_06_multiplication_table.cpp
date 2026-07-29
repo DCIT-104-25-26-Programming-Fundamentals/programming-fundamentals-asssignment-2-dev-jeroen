@@ -57,3 +57,49 @@
 #include <iostream>
 using namespace std;
 
+// PART A: Function to print multiplication table for a single number
+void printTable(int num) {
+    cout << "Multiplication Table for " << num << ":" << endl;
+    for (int i = 1; i <= 12; i++) {
+        cout << num << "  x  " << i;
+        if (i < 10) {
+            cout << "  =  "; // Alignment spacing for single digits
+        } else {
+            cout << " =  "; // Alignment spacing for double digits (10, 11, 12)
+        }
+        cout << num * i << endl;
+    }
+}
+
+// PART B: Function to print multiplication tables from 1 to N
+void printTablesUpTo(int n) {
+    if (n <= 0) {
+        cout << "Error: N must be a positive integer." << endl;
+        return;
+    }
+
+    for (int i = 1; i <= n; i++) {
+        printTable(i);
+        if (i < n) {
+            cout << "---------------------------" << endl;
+        }
+    }
+}
+
+int main() {
+    int num;
+
+    // --- PART A ---
+    cout << "=== PART A: SINGLE TABLE ===" << endl;
+    cout << "Enter a number: ";
+    cin >> num;
+    printTable(num);
+
+    // --- PART B ---
+    cout << "\n=== PART B: TABLES FROM 1 TO N ===" << endl;
+    cout << "Enter N: ";
+    cin >> num;
+    printTablesUpTo(num);
+
+    return 0;
+}
