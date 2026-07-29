@@ -71,5 +71,114 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <limits>
 using namespace std;
 
+// Operation functions
+double add(double a, double b) {
+    return a + b;
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b) {
+    return a / b;
+}
+
+int modulus(int a, int b) {
+    return a % b;
+}
+
+double power(double base, double exp) {
+    return pow(base, exp);
+}
+
+int main() {
+    int choice = 0;
+
+    while (choice != 7) {
+        cout << "\n============================\n";
+        cout << "     SIMPLE CALCULATOR\n";
+        cout << "============================\n";
+        cout << "1. Addition\n";
+        cout << "2. Subtraction\n";
+        cout << "3. Multiplication\n";
+        cout << "4. Division\n";
+        cout << "5. Modulus\n";
+        cout << "6. Exponentiation\n";
+        cout << "7. Quit\n";
+        cout << "Select an operation (1-7): ";
+
+        if (!(cin >> choice)) {
+            cout << "Invalid choice. Please enter a number between 1 and 7.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
+
+        if (choice == 7) {
+            cout << "Goodbye!\n";
+            break;
+        }
+
+        if (choice < 1 || choice > 7) {
+            cout << "Invalid choice. Please select an option between 1 and 7.\n";
+            continue;
+        }
+
+        double num1, num2;
+        cout << "Enter first number : ";
+        while (!(cin >> num1)) {
+            cout << "Invalid input. Enter a valid number: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+
+        cout << "Enter second number: ";
+        while (!(cin >> num2)) {
+            cout << "Invalid input. Enter a valid number: ";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+
+        cout << fixed << setprecision(2);
+
+        switch (choice) {
+            case 1:
+                cout << "Result: " << num1 << " + " << num2 << " = " << add(num1, num2) << endl;
+                break;
+            case 2:
+                cout << "Result: " << num1 << " - " << num2 << " = " << subtract(num1, num2) << endl;
+                break;
+            case 3:
+                cout << "Result: " << num1 << " * " << num2 << " = " << multiply(num1, num2) << endl;
+                break;
+            case 4:
+                if (num2 == 0) {
+                    cout << "Error: Cannot divide by zero." << endl;
+                } else {
+                    cout << "Result: " << num1 << " / " << num2 << " = " << divide(num1, num2) << endl;
+                }
+                break;
+            case 5:
+                if (static_cast<int>(num2) == 0) {
+                    cout << "Error: Cannot perform modulus by zero." << endl;
+                } else {
+                    cout << "Result: " << static_cast<int>(num1) << " % " << static_cast<int>(num2)
+                         << " = " << modulus(static_cast<int>(num1), static_cast<int>(num2)) << endl;
+                }
+                break;
+            case 6:
+                cout << "Result: " << num1 << " ^ " << num2 << " = " << power(num1, num2) << endl;
+                break;
+        }
+    }
+
+    return 0;
+}
